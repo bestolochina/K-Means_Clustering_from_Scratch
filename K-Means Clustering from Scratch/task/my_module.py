@@ -5,7 +5,9 @@ class CustomKMeans:
     def __init__(self, features: np.ndarray, target: np.ndarray):
         self.features = features
         self.target = target
-        self.centroids = self.features[0:3]
+        self.clusters_num = 3
+        self.labels = None
+        self.centroids = self.features[0:self.clusters_num]
 
     def euclidean_distance_matrix(self, a: np.ndarray, b: np.ndarray) -> np.ndarray:
         """
@@ -22,9 +24,20 @@ class CustomKMeans:
         dists = np.sqrt(np.maximum(squared_dists, 0.0))  # shape: (n_samples, n_centroids)
         return dists
 
-    def find_nearest_center(self) -> np.ndarray:
+    def find_nearest_center(self):
         """
-        Returns the index of the nearest centroid for each feature vector.
+        Stores the index of the nearest centroid for each feature vector.
         """
         dists = self.euclidean_distance_matrix(self.features, self.centroids)
-        return np.argmin(dists, axis=1)  # shape: (n_samples,)
+        self.labels = np.argmin(dists, axis=1)  # shape: (n_samples,)
+
+    def calculate_new_centers(self):
+        """
+        Calculates new centroids based on results of previous clusterization
+        """
+        cluster_labels = np.unique(self.labels)
+        new_centroids = []
+        for label in cluster_labels:
+            centroid = np.mean(self.features[self.labels == label], axis=0)
+            new_centroids.append(centroid)
+        self.centroids = np.array(new_centroids)

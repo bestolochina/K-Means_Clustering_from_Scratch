@@ -1,7 +1,5 @@
-from typing import Any
-
+from my_module import CustomKMeans
 import numpy as np
-from numpy import floating
 from sklearn.datasets import load_wine
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -50,28 +48,6 @@ def plot_comparison(data: np.ndarray, predicted_clusters: np.ndarray, true_clust
         plt.show()
 
 
-def euclidean_distance_matrix(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """
-    Computes the pairwise Euclidean distances between each row of `a` and each row of `b`.
-    `a` shape: (n_samples, n_features)
-    `b` shape: (n_centroids, n_features)
-    Returns a distance matrix of shape (n_samples, n_centroids)
-    """
-    # Broadcasting: ||a - b||^2 = ||a||^2 + ||b||^2 - 2 * a·b
-    a_sq = np.sum(a ** 2, axis=1).reshape(-1, 1)  # shape: (n_samples, 1)
-    b_sq = np.sum(b ** 2, axis=1).reshape(1, -1)  # shape: (1, n_centroids)
-    ab = np.dot(a, b.T)  # shape: (n_samples, n_centroids)
-    dists = np.sqrt(a_sq - 2 * ab + b_sq)  # shape: (n_samples, n_centroids)
-    return dists
-
-
-def find_nearest_center(features: np.ndarray, centroids: np.ndarray) -> np.ndarray:
-    """
-    Returns the index of the nearest centroid for each feature vector.
-    """
-    dists = euclidean_distance_matrix(features, centroids)
-    return np.argmin(dists, axis=1)  # shape: (n_samples,)
-
 if __name__ == '__main__':
     # Load data
     data = load_wine(as_frame=True, return_X_y=True)
@@ -92,6 +68,6 @@ if __name__ == '__main__':
     X_full = scaler.fit_transform(X_full)
 
     # write your code here
-    centroids = X_full[0:3]
-    labels = find_nearest_center(X_full[-10:], centroids)
+    my_class = CustomKMeans(X_full[-10:], y_full)
+    labels = my_class.find_nearest_center()
     print(labels.tolist())

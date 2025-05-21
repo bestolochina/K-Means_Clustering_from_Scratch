@@ -68,7 +68,7 @@ if __name__ == '__main__':
     X_full = scaler.fit_transform(X_full)
 
     # write your code here
-    my_class = CustomKMeans(X_full, y_full)
-    my_class.find_nearest_center()
-    my_class.calculate_new_centers()
-    print(my_class.centroids.flatten().tolist())
+    my_class = CustomKMeans(k=2)
+    my_class.fit(X=X_full)
+    prediction = my_class.predict(X_full[:10])
+    print(prediction.tolist())

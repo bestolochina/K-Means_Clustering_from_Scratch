@@ -12,6 +12,12 @@ files:
   - name: tests.py
     visible: false
     learner_created: false
+  - name: my_module.py
+    visible: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22698#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 22 May 2025 19:34:49 UTC"
 record: -1

@@ -68,7 +68,19 @@ if __name__ == '__main__':
     X_full = scaler.fit_transform(X_full)
 
     # write your code here
-    my_class = CustomKMeans(k=2)
-    my_class.fit(X=X_full)
-    prediction = my_class.predict(X_full[:10])
-    print(prediction.tolist())
+    inertias = []
+    for k in range(2, 11):
+        my_class = CustomKMeans(k=k)
+        my_class.fit(X=X_full)
+        inertias.append(float(my_class.compute_inertia()))
+    print(inertias)
+
+    fig, ax = plt.subplots()
+    ax.set_xlabel('Number of clusters k')
+    ax.set_ylabel('Inertia (WCSS)')
+    ax.set_title('Elbow method')
+    ax.grid(True)
+
+    ax.plot(range(2, 11), inertias, marker='o')
+
+    plt.show()

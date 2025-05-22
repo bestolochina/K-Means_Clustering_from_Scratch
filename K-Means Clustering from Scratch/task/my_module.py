@@ -94,3 +94,16 @@ class CustomKMeans:
         """
         labels = self.find_nearest_center(features=X)
         return labels
+
+    def compute_inertia(self) -> float:
+        """
+        Calculates the inertia of the current clustering.
+
+        Inertia is the sum of squared Euclidean distances between each sample
+        and the centroid of the cluster it belongs to. It reflects how internally
+        coherent the clusters are (lower is better).
+
+        Returns:
+            float: The total inertia of the current clustering.
+        """
+        return np.sum(np.linalg.norm(self.features - self.centroids[self.labels], axis=1) ** 2)

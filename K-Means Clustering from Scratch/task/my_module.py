@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.metrics import silhouette_score
 
 
 class CustomKMeans:
@@ -107,3 +108,18 @@ class CustomKMeans:
             float: The total inertia of the current clustering.
         """
         return np.sum(np.linalg.norm(self.features - self.centroids[self.labels], axis=1) ** 2)
+
+    def compute_silhouette_score(self) -> float:
+        """
+        Computes the silhouette score for the current clustering.
+
+        The silhouette score measures how similar an object is to its own cluster
+        compared to other clusters. The score ranges from -1 to 1:
+        - 1 indicates that the sample is far away from the neighboring clusters.
+        - 0 indicates that the sample is on or very close to the decision boundary between two clusters.
+        - Negative values indicate that samples might have been assigned to the wrong cluster.
+
+        Returns:
+            float: The silhouette score of the current clustering.
+        """
+        return silhouette_score(self.features, self.labels)

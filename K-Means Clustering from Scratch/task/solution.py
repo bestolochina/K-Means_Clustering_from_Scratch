@@ -69,18 +69,33 @@ if __name__ == '__main__':
 
     # write your code here
     inertias = []
-    for k in range(2, 11):
+    silhouette_scores = []
+    k_values = range(2, 11)
+
+    for k in k_values:
         my_class = CustomKMeans(k=k)
         my_class.fit(X=X_full)
         inertias.append(float(my_class.compute_inertia()))
-    print(inertias)
+        silhouette_scores.append(float(my_class.compute_silhouette_score()))
+    # print(inertias)
+    print(silhouette_scores)
 
-    fig, ax = plt.subplots()
-    ax.set_xlabel('Number of clusters k')
-    ax.set_ylabel('Inertia (WCSS)')
-    ax.set_title('Elbow method')
-    ax.grid(True)
+    # Plotting
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
 
-    ax.plot(range(2, 11), inertias, marker='o')
+    # Elbow method (Inertia)
+    ax1.plot(k_values, inertias, marker='o', linestyle='-')
+    ax1.set_title('Elbow Method (Inertia)')
+    ax1.set_xlabel('Number of Clusters (k)')
+    ax1.set_ylabel('Inertia (WCSS)')
+    ax1.grid(True)
 
+    # Silhouette score
+    ax2.plot(k_values, silhouette_scores, marker='o', color='green', linestyle='-')
+    ax2.set_title('Silhouette Score')
+    ax2.set_xlabel('Number of Clusters (k)')
+    ax2.set_ylabel('Silhouette Score')
+    ax2.grid(True)
+
+    plt.tight_layout()
     plt.show()

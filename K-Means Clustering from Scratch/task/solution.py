@@ -68,34 +68,9 @@ if __name__ == '__main__':
     X_full = scaler.fit_transform(X_full)
 
     # write your code here
-    inertias = []
-    silhouette_scores = []
-    k_values = range(2, 11)
+    my_class = CustomKMeans(k=3)
+    my_class.fit(X=X_full)
+    predictions = my_class.labels[:20].tolist()
+    print(predictions)
 
-    for k in k_values:
-        my_class = CustomKMeans(k=k)
-        my_class.fit(X=X_full)
-        inertias.append(float(my_class.compute_inertia()))
-        silhouette_scores.append(float(my_class.compute_silhouette_score()))
-    # print(inertias)
-    print(silhouette_scores)
-
-    # Plotting
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-
-    # Elbow method (Inertia)
-    ax1.plot(k_values, inertias, marker='o', linestyle='-')
-    ax1.set_title('Elbow Method (Inertia)')
-    ax1.set_xlabel('Number of Clusters (k)')
-    ax1.set_ylabel('Inertia (WCSS)')
-    ax1.grid(True)
-
-    # Silhouette score
-    ax2.plot(k_values, silhouette_scores, marker='o', color='green', linestyle='-')
-    ax2.set_title('Silhouette Score')
-    ax2.set_xlabel('Number of Clusters (k)')
-    ax2.set_ylabel('Silhouette Score')
-    ax2.grid(True)
-
-    plt.tight_layout()
-    plt.show()
+    plot_comparison(X_full, my_class.labels, y_full, my_class.centroids)

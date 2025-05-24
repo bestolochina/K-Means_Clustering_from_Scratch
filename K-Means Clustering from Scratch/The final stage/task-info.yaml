@@ -12,6 +12,17 @@ files:
   - name: tests.py
     visible: false
     learner_created: false
+  - name: my_module.py
+    visible: true
+    learner_created: true
+  - name: Visualization.png
+    visible: true
+    is_binary: true
+    learner_created: true
 feedback_link: https://hyperskill.org/learn/step/22700#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">Hyperskill</a>
+    to continue learning.
+  time: "Sat, 24 May 2025 15:18:59 UTC"
+record: 6

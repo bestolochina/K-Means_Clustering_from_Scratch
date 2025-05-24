@@ -3,13 +3,10 @@ from hstest.stage_test import List
 from utils.utils import full_check, get_list
 
 # The source data I will test on
-true_data = [0.2683134097105212, 0.2848589191898987, 0.2656988172122933,
-             0.18095763134156362, 0.17996607210955454, 0.17087615229095043,
-             0.12964932745571078, 0.13317405614855718, 0.1261114052668434]
+true_data = [1, 1, 2, 1, 0, 1, 0, 2, 0, 2, 1, 2, 1, 2, 1, 0, 0, 0, 1, 0]
 
 
-
-class Tests5(StageTest):
+class Tests6(StageTest):
 
     def generate(self) -> List[TestCase]:
         return [TestCase(time_limit=1000000)]
@@ -30,8 +27,8 @@ class Tests5(StageTest):
         except Exception:
             return CheckResult.wrong('Seems that data output is in wrong format!')
 
-        error = 'Incorrect silhouette scores.'
-        check_result = full_check(student, true_data, '', tolerance=0.1, error_str=error)
+        error = 'Incorrect cluster labels.'
+        check_result = full_check(student, true_data, '', tolerance=0, error_str=error)
         if check_result:
             return check_result
 
@@ -39,4 +36,4 @@ class Tests5(StageTest):
 
 
 if __name__ == '__main__':
-    Tests5().run_tests()
+    Tests6().run_tests()

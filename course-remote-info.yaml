@@ -4,7 +4,7 @@ hyperskill_project:
   is_template_based: false
   use_ide: true
   environment: unittest
-update_date: "Fri, 23 May 2025 10:49:25 UTC"
+update_date: "Sat, 24 May 2025 14:16:05 UTC"
 stages:
   - id: 1489
     step: 22695
@@ -23,7 +23,7 @@ stages:
     is_completed: true
   - id: 1494
     step: 22700
-    is_completed: false
+    is_completed: true
 topics:
   0:
     - title: What is math?

@@ -3,12 +3,12 @@ from sklearn.metrics import silhouette_score
 
 
 class CustomKMeans:
-    def __init__(self, k: int = 2) -> None:
+    def __init__(self, k: int = 3) -> None:
         """
         Initializes the CustomKMeans clustering model.
 
         Parameters:
-        - k (int): Number of clusters to form. Default is 2.
+        - k (int): Number of clusters to form. Default is 3.
         """
         self.features = None
         self.clusters_num = k
